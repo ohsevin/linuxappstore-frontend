@@ -1,7 +1,7 @@
 module.exports = {
   pathPrefix: "/",
   siteMetadata: {
-    title: `Title from siteMetadata`,
+    title: `Linux App Store`
   },
   plugins: [
     'gatsby-plugin-top-layout',
@@ -18,9 +18,10 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/src/`,
+        path: `${__dirname}/data/`,
       },
     },
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-json`,
   ],
 }
