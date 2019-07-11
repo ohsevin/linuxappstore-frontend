@@ -13,7 +13,7 @@ export default function TopLayout(props) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
-        <title>Chad Adams</title>
+        <title>Linux App Store</title>
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
           rel="stylesheet"
