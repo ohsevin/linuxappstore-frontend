@@ -6,7 +6,11 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Drawer
+  Drawer,
+  Divider,
+  List,
+  ListItem,
+  ListItemText
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
@@ -15,6 +19,13 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useTheme } from "@material-ui/styles";
 
 const drawerWidth = 240;
+
+const sources = [
+    { id: 0, src: './icons/app_store.png', name: 'All' },
+    { id: 1, src: './icons/appimage.png', name: 'AppImage' },
+    { id: 2, src: './icons/flatpak.png', name: 'Flatpak' },
+    { id: 3, src: './icons/snap.png', name: 'Snap' },
+  ]
 
 const styles = makeStyles(theme => ({
   root: {
@@ -54,9 +65,9 @@ const styles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
+    width: theme.spacing(7 + 1),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9 + 1,
+      width: theme.spacing(9 + 1),
     },
   },
   toolbar: {
@@ -71,6 +82,7 @@ const styles = makeStyles(theme => ({
 export default () => {
   const classes = styles()
   const [open, setOpen] = React.useState(false)
+  const [appType, setAppType] = React.useState(0)
   const theme = useTheme()
 
   function handleDrawerOpen() {
@@ -79,6 +91,10 @@ export default () => {
 
   function handleDrawerClose() {
     setOpen(false);
+  }
+
+  function onSourceClick(index) {
+      setAppType(sources[index].id)
   }
 
   return (
@@ -126,6 +142,19 @@ export default () => {
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
+
+          <Divider/>
+
+          <List>
+
+          {sources.map((item, index) =>
+              <ListItem button style={{ backgroundColor: appType === index ? "rgba(0, 0, 0, 0.08)" : "" }} key={item.name} onClick={() => onSourceClick(index)}>
+                <img className="icon" src={item.src} alt={item.name} style={{ width: 24, marginRight: 15 }} />
+                <ListItemText primary={item.name} style={{ display: open ? '' : 'none' }}></ListItemText>
+              </ListItem>
+            )}
+
+          </List>
 
       </Drawer>
     </div>
